@@ -174,8 +174,6 @@ class UserController extends Controller
         }
 
 
-
-
         $amount = number_format($request->amount, 2);
 
         $get_depo = Deposit::where('trx', $request->order_id)->first() ?? null;
