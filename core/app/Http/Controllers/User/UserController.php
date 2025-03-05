@@ -190,7 +190,7 @@ class UserController extends Controller
         }
 
         $get_user_id = User::where('email', $request->email)->first()->id;
-        UserWallet::where('user_id', $get_user_id)->incremrnt('balance', $request->amount) ?? null;
+        UserWallet::where('user_id', $get_user_id)->increment('balance', $request->amount) ?? null;
 
 
         $message = $request->email."| just funded ".$request->amount." | ".date('y-m-d-m-Y-H-i-s');
