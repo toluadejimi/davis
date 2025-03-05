@@ -193,8 +193,6 @@ class UserController extends Controller
         UserWallet::where('user_id', $get_user_id)->increment('balance', $request->amount) ?? null;
 
 
-        $message = $request->email."| just funded ".$request->amount." | ".date('y-m-d-m-Y-H-i-s');
-        send_notification($message);
 
         return response()->json([
             'status' => true,
