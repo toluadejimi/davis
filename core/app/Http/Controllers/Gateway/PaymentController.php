@@ -373,7 +373,6 @@ class PaymentController extends Controller
     {
         $request->validate([
             'gateway' => 'required',
-            'currency' => 'required',
             'id' => 'required',
             'qty' => 'required|integer|gt:0',
         ]);
@@ -409,7 +408,7 @@ class PaymentController extends Controller
         if(!$isWallet){
             $gate = GatewayCurrency::whereHas('method', function ($gate) {
                 $gate->where('status', Status::ENABLE);
-            })->where('method_code', $request->gateway)->where('currency', $request->currency)->first();
+            })->where('method_code', $request->gateway)->where('currency', "NGN")->first();
             if (!$gate) {
                 $notify[] = ['error', 'Invalid gateway'];
                 return back()->withNotify($notify);
@@ -439,7 +438,7 @@ class PaymentController extends Controller
             $data->user_id = $user->id;
             $data->order_id = $order->id;
             $data->method_code = $gate->method_code;
-            $data->method_currency = strtoupper($gate->currency);
+            $data->method_currency = "NGN";
             $data->amount = $amount;
             $data->charge = $charge;
             $data->rate = $gate->rate;
